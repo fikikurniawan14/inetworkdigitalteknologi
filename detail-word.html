@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Kursus - Microsoft Word</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; min-height: 100vh; position: relative; overflow-x: hidden; }
+        body::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="80" r="1" fill="%23ffffff" opacity="0.1"/></svg>') repeat; z-index: -1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 5; }
+        .back-btn { background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; transition: background 0.3s; }
+        .back-btn:hover { background: #5a67d8; }
+        .detail-header { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 30px; }
+        .detail-icon { font-size: 5em; color: #667eea; margin-bottom: 20px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+        .detail-title { font-size: 3em; font-weight: bold; color: #333; margin-bottom: 10px; }
+        .detail-subtitle { font-size: 1.5em; color: #666; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .content-section { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .content-section h3 { color: #667eea; margin-bottom: 15px; }
+        .content-section ul { list-style: none; padding: 0; }
+        .content-section ul li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .content-section ul li::before { content: '✓'; position: absolute; left: 0; color: #667eea; }
+        .testimonial { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .testimonial p { font-style: italic; }
+        .testimonial cite { font-weight: bold; color: #667eea; }
+        .enroll-btn { background: #667eea; color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; font-size: 1.2em; transition: background 0.3s; display: block; margin: 0 auto; }
+        .enroll-btn:hover { background: #5a67d8; }
+        @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; } .detail-title { font-size: 2em; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-btn" onclick="window.location.href='vvvv.html'"><i class="fas fa-arrow-left"></i> Kembali ke Profil</button>
+        
+        <div class="detail-header">
+            <i class="fas fa-file-word detail-icon"></i>
+            <h1 class="detail-title">Microsoft Word</h1>
+            <p class="detail-subtitle">Belajar membuat dokumen profesional, format teks, dan kolaborasi.</p>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-section">
+                <h3>Deskripsi Kursus</h3>
+                <p>Dalam kursus ini, Anda akan belajar cara membuat dan mengedit dokumen profesional menggunakan Microsoft Word. Topik meliputi format teks, tabel, gambar, kolaborasi online, dan tips untuk presentasi dokumen yang efektif. Kursus ini cocok untuk pemula hingga mahir, dengan durasi 4 minggu dan sertifikat di akhir.</p>
+            </div>
+            <div class="content-section">
+                <h3>Materi Pembelajaran</h3>
+                <ul>
+                    <li>Dasar-dasar interface Word</li>
+                    <li>Format teks dan paragraf</li>
+                    <li>Membuat tabel dan grafik</li>
+                    <li>Kolaborasi real-time</li>
+                    <li>Tips produktivitas</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h3>Testimonial</h3>
+            <div class="testimonial">
+                <p>"Kursus ini sangat membantu saya dalam pekerjaan kantor. Sekarang saya bisa membuat dokumen yang profesional dengan cepat!"</p>
+                <cite>- Ahmad, Mahasiswa</cite>
+            </div>
+            <div class="testimonial">
+                <p>"Instruktur jelas dan materi mudah dipahami. Recommended untuk semua yang ingin mahir Word."</p>
+                <cite>- Siti, Pegawai Swasta</cite>
+            </div>
+        </div>
+        
+        <button class="enroll-btn">Daftar Sekarang</button>
+    </div>
+</body>
+</html>

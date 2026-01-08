@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pegawai - Kursus Komputer Modern</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Tambahkan jsPDF untuk generasi PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; display: flex; min-height: 100vh; }
+        .sidebar { width: 250px; background: #2c3e50; color: white; padding: 20px; position: fixed; height: 100%; overflow-y: auto; box-shadow: 2px 0 5px rgba(0,0,0,0.1); }
+        .sidebar h2 { margin-bottom: 20px; font-size: 1.5em; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { margin-bottom: 15px; }
+        .sidebar ul li a { color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: background 0.3s; }
+        .sidebar ul li a:hover { background: #34495e; }
+        .sidebar ul li a i { margin-right: 10px; }
+        .main-content { margin-left: 250px; flex: 1; padding: 20px; }
+        .section { padding: 40px 0; background: white; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        @media (max-width: 768px) { .sidebar { width: 100%; height: auto; position: static; } .main-content { margin-left: 0; } }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <h2><i class="fas fa-laptop-code"></i> Kursus Komputer</h2>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="vvvv.html"><i class="fas fa-book"></i> Kursus</a></li>
+            <li><a href="w.html"><i class="fas fa-user"></i> Profil</a></li>
+            <li><a href="q.html"><i class="fas fa-user-plus"></i> Pendaftaran</a></li>
+            <li><a href="d.html"><i class="fas fa-users"></i> Data Siswa</a></li>
+            <li><a href="input-pegawai.html"><i class="fas fa-user-edit"></i> Input Pegawai</a></li>
+            <li><a href="data-pegawai.html"><i class="fas fa-users-cog"></i> Data Pegawai</a></li>
+            <li><a href="es.html"><i class="fas fa-certificate"></i> E-Sertifikat</a></li>
+            <li><a href="e-learning.html"><i class="fas fa-graduation-cap"></i> E-Learning</a></li>
+            <li><a href="logincoba.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section class="section">
+            <div class="container">
+                <h2 class="text-center mb-4">Data Pegawai</h2>
+                <div id="pegawaiTableContainer">
+                    <!-- Tabel akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal untuk Edit Pegawai -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Pegawai</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editIndex">
+                        <div class="mb-3">
+                            <label for="editNama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="editNama" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editJabatan" class="form-label">Jabatan</label>
+                            <input type="text" class="form-control" id="editJabatan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTugas" class="form-label">Tugas dan Wewenang</label>
+                            <textarea class="form-control" id="editTugas" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveEditBtn">Simpan Perubahan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadPegawaiData() {
+            const pegawaiList = JSON.parse(localStorage.getItem('pegawaiList')) || [];
+            const container = document.getElementById('pegawaiTableContainer');
+
+            if (pegawaiList.length === 0) {
+                container.innerHTML = '<p class="text-center">Belum ada data pegawai.</p>';
+                return;
+            }
+
+            let tableHTML = `
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama Lengkap</th>
+                            <th>Jabatan</th>
+                            <th>Tugas dan Wewenang</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            pegawaiList.forEach((pegawai, index) => {
+                tableHTML += `
+                    <tr>
+                        <td>${pegawai.nama}</td>
+                        <td>${pegawai.jabatan}</td>
+                        <td>${pegawai.tugas}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm me-2" onclick="editPegawai(${index})"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="btn btn-danger btn-sm me-2" onclick="hapusPegawai(${index})"><i class="fas fa-trash"></i> Hapus</button>
+                            <button class="btn btn-info btn-sm" onclick="printPegawaiPDF(${index})"><i class="fas fa-print"></i> Print PDF</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = tableHTML;
+        }
+
+        function editPegawai(index) {
+            const pegawaiList = JSON.parse(localStorage.getItem('pegawaiList')) || [];
+            const pegawai = pegawaiList[index];
+
+            // Isi form edit dengan data yang ada
+            document.getElementById('editIndex').value = index;
+            document.getElementById('editNama').value = pegawai.nama;
+            document.getElementById('editJabatan').value = pegawai.jabatan;
+            document.getElementById('editTugas').value = pegawai.tugas;
+
+            // Tampilkan modal
+            const modal = new bootstrap.Modal(document.getElementById('editModal'));
+            modal.show();
+        }
+
+        function hapusPegawai(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus data pegawai ini?')) {
+                let pegawaiList = JSON.parse(localStorage.getItem('pegawaiList')) || [];
+                pegawaiList.splice(index, 1); // Hapus item berdasarkan index
+                localStorage.setItem('pegawaiList', JSON.stringify(pegawaiList));
+                loadPegawaiData(); // Reload tabel
+                alert('Data pegawai berhasil dihapus!');
+            }
+        }
+
+        function printPegawaiPDF(index) {
+            const pegawaiList = JSON.parse(localStorage.getItem('pegawaiList')) || [];
+            const pegawai = pegawaiList[index];
+
+            // Inisialisasi jsPDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Tambahkan konten ke PDF
+            doc.setFontSize(20);
+            doc.text('Detail Pegawai', 20, 30);
+            doc.setFontSize(12);
+            doc.text(`Nama Lengkap: ${pegawai.nama}`, 20, 50);
+            doc.text(`Jabatan: ${pegawai.jabatan}`, 20, 60);
+            doc.text('Tugas dan Wewenang:', 20, 70);
+            // Split tugas menjadi baris jika panjang
+            const tugasLines = doc.splitTextToSize(pegawai.tugas, 170);
+            doc.text(tugasLines, 20, 80);
+
+            // Unduh PDF
+            doc.save(`Detail_Pegawai_${pegawai.nama.replace(/\s+/g, '_')}.pdf`);
+        }
+
+        // Event listener untuk tombol simpan edit
+        document.getElementById('saveEditBtn').addEventListener('click', function() {
+            const index = document.getElementById('editIndex').value;
+            const nama = document.getElementById('editNama').value;
+            const jabatan = document.getElementById('editJabatan').value;
+            const tugas = document.getElementById('editTugas').value;
+
+            let pegawaiList = JSON.parse(localStorage.getItem('pegawaiList')) || [];
+            pegawaiList[index] = { nama, jabatan, tugas }; // Update data
+            localStorage.setItem('pegawaiList', JSON.stringify(pegawaiList));
+
+            // Tutup modal dan reload tabel
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+            modal.hide();
+            loadPegawaiData();
+            alert('Data pegawai berhasil diperbarui!');
+        });
+
+        // Load data saat halaman dimuat
+        loadPegawaiData();
+    </script>
+</body>
+</html>

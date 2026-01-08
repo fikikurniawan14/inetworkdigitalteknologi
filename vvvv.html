@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Lembaga Kursus Komputer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; display: flex; min-height: 100vh; position: relative; overflow-x: hidden; }
+        body::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="80" r="1" fill="%23ffffff" opacity="0.1"/></svg>') repeat; z-index: -1; }
+        .sidebar { width: 250px; background: #2c3e50; color: white; padding: 20px; position: fixed; height: 100%; overflow-y: auto; box-shadow: 2px 0 5px rgba(0,0,0,0.1); z-index: 10; }
+        .sidebar h2 { margin-bottom: 20px; font-size: 1.5em; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { margin-bottom: 15px; }
+        .sidebar ul li a { color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: background 0.3s; }
+        .sidebar ul li a:hover { background: #34495e; }
+        .sidebar ul li a i { margin-right: 10px; }
+        .main-content { margin-left: 250px; flex: 1; padding: 20px; position: relative; z-index: 5; }
+        header { background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); padding: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="5" fill="%23667eea" opacity="0.1"/></svg>') repeat; z-index: -1; }
+        .header-content { display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+        .header-logo { font-size: 4em; color: #667eea; margin-right: 20px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .header-title { font-size: 2.5em; font-weight: bold; color: #333; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .header-subtitle { font-size: 1.2em; color: #666; margin-top: 10px; }
+        .floating-icons { position: absolute; top: 10%; right: 10%; font-size: 2em; color: rgba(255,255,255,0.3); animation: float 3s ease-in-out infinite; }
+        .floating-icons i { display: block; margin-bottom: 10px; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .course-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+        .course-icon { font-size: 3em; color: #667eea; margin-bottom: 15px; }
+        .course-card h3 { margin-bottom: 10px; font-size: 1.2em; }
+        .course-card p { color: #666; margin-bottom: 15px; }
+        .btn { background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a67d8; }
+        @media (max-width: 768px) { .sidebar { width: 100%; height: auto; position: static; } .main-content { margin-left: 0; } .courses-grid { grid-template-columns: 1fr; } .header-content { flex-direction: column; } .header-logo { margin-right: 0; margin-bottom: 10px; } }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-laptop-code"></i> Kursus Komputer</h2>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="vvvv.html"><i class="fas fa-book"></i> Kursus</a></li>
+            <li><a href="w.html"><i class="fas fa-user"></i> Profil</a></li>
+            <li><a href="q.html"><i class="fas fa-user-plus"></i> Pendaftaran</a></li>
+            <li><a href="d.html"><i class="fas fa-users"></i> Data Siswa</a></li>
+            <li><a href="input-pegawai.html"><i class="fas fa-user-edit"></i> Input Pegawai</a></li>
+            <li><a href="data-pegawai.html"><i class="fas fa-users-cog"></i> Data Pegawai</a></li>
+            <li><a href="es.html"><i class="fas fa-certificate"></i> E-Sertifikat</a></li>
+            <li><a href="e-learning.html"><i class="fas fa-graduation-cap"></i> E-Learning</a></li>
+            <li><a href="logincoba.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+    
+    <div class="floating-icons">
+        <i class="fas fa-laptop"></i>
+        <i class="fas fa-keyboard"></i>
+        <i class="fas fa-mouse"></i>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <i class="fas fa-laptop-code header-logo"></i>
+                <div class="header-title">Lembaga Kursus Dan Pelatian INETWORK DIGITAL TEKNOLOGI</div>
+            </div>
+            <div class="header-subtitle">Menu yang sedang dibuka: Profil</div>
+        </header>
+        
+        <section class="courses-grid">
+            <div class="course-card">
+                <i class="fas fa-file-word course-icon"></i>
+                <h3>Microsoft Word</h3>
+                <p>Belajar membuat dokumen profesional, format teks, dan kolaborasi.</p>
+                <button class="btn" onclick="window.location.href='detail-word.html'">Pelajari Lebih Lanjut</button>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-file-excel course-icon"></i>
+                <h3>Microsoft Excel</h3>
+                <p>Menguasai analisis data, rumus, grafik, dan otomasi tugas.</p>
+                <button class="btn" onclick="window.location.href='detail-excel.html'">Pelajari Lebih Lanjut</button>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-presentation-screen course-icon"></i>
+                <h3>Microsoft PowerPoint</h3>
+                <p>Membuat presentasi yang menarik dan efektif untuk berbagai keperluan.</p>
+                <button class="btn" onclick="window.location.href='detail-powerpoint.html'">Pelajari Lebih Lanjut</button>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-envelope course-icon"></i>
+                <h3>Microsoft Outlook</h3>
+                <p>Mengelola email, kalender, dan tugas dengan efisien.</p>
+                <button class="btn" onclick="window.location.href='detail-outlook.html'">Pelajari Lebih Lanjut</button>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.course-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s, transform 0.5s';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

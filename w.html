@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Lembaga Kursus Komputer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; display: flex; min-height: 100vh; position: relative; overflow-x: hidden; }
+        body::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="80" r="1" fill="%23ffffff" opacity="0.1"/></svg>') repeat; z-index: -1; }
+        .sidebar { width: 250px; background: #2c3e50; color: white; padding: 20px; position: fixed; height: 100%; overflow-y: auto; box-shadow: 2px 0 5px rgba(0,0,0,0.1); z-index: 10; }
+        .sidebar h2 { margin-bottom: 20px; font-size: 1.5em; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { margin-bottom: 15px; }
+        .sidebar ul li a { color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: background 0.3s; }
+        .sidebar ul li a:hover { background: #34495e; }
+        .sidebar ul li a i { margin-right: 10px; }
+        .main-content { margin-left: 250px; flex: 1; padding: 20px; position: relative; z-index: 5; }
+        header { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; position: relative; }
+        header h1 { font-size: 2em; margin-bottom: 10px; }
+        header p { color: #666; }
+        .floating-icons { position: absolute; top: 10%; right: 10%; font-size: 2em; color: rgba(255,255,255,0.3); animation: float 3s ease-in-out infinite; }
+        .floating-icons i { display: block; margin-bottom: 10px; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .profile-section { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; position: relative; }
+        .profile-section h1 { font-size: 2.5em; margin-bottom: 20px; color: #667eea; }
+        .profile-section p { font-size: 1.1em; line-height: 1.6; color: #666; margin-bottom: 20px; }
+        .computer-element { position: absolute; top: 20px; right: 20px; font-size: 3em; color: #667eea; opacity: 0.5; }
+        .courses-focus { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; display: flex; flex-direction: column; align-items: center; }
+        .courses-focus h2 { text-align: center; margin-bottom: 20px; color: #667eea; }
+        .courses-focus ul { list-style: none; padding: 0; margin-bottom: 30px; width: 100%; max-width: 600px; }
+        .courses-focus li { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; }
+        .courses-focus li i { margin-right: 15px; color: #667eea; font-size: 1.5em; }
+        .courses-focus li:last-child { border-bottom: none; }
+        .chart-container { width: 100%; max-width: 600px; margin-top: 20px; }
+        .founder-card { background: #f8f9fa; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative; }
+        .founder-card img { width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px; border: 5px solid #667eea; }
+        .founder-card h3 { font-size: 1.8em; margin-bottom: 10px; color: #333; }
+        .founder-card p { color: #666; line-height: 1.6; }
+        .founder-card::before { content: '\f108'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 10px; left: 10px; font-size: 2em; color: rgba(102, 126, 234, 0.2); }
+        @media (max-width: 768px) { .sidebar { width: 100%; height: auto; position: static; } .main-content { margin-left: 0; } .founder-card { flex-direction: column; } .floating-icons { display: none; } .computer-element { display: none; } .courses-focus { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-laptop-code"></i> Kursus Komputer</h2>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="vvvv.html"><i class="fas fa-book"></i> Kursus</a></li>
+            <li><a href="w.html"><i class="fas fa-user"></i> Profil</a></li>
+            <li><a href="q.html"><i class="fas fa-user-plus"></i> Pendaftaran</a></li>
+            <li><a href="d.html"><i class="fas fa-users"></i> Data Siswa</a></li>
+            <li><a href="input-pegawai.html"><i class="fas fa-user-edit"></i> Input Pegawai</a></li>
+            <li><a href="data-pegawai.html"><i class="fas fa-users-cog"></i> Data Pegawai</a></li>
+            <li><a href="es.html"><i class="fas fa-certificate"></i> E-Sertifikat</a></li>
+            <li><a href="e-learning.html"><i class="fas fa-graduation-cap"></i> E-Learning</a></li>
+            <li><a href="logincoba.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+    
+    <div class="floating-icons">
+        <i class="fas fa-laptop"></i>
+        <i class="fas fa-keyboard"></i>
+        <i class="fas fa-mouse"></i>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <h1><i class="fas fa-user"></i> Profil Lembaga Kursus Komputer</h1>
+            <p>Pelajari lebih lanjut tentang kami, fokus kursus, dan pendiri kami.</p>
+        </header>
+        
+        <section class="profile-section">
+            <i class="fas fa-desktop computer-element"></i>
+            <h1><i class="fas fa-info-circle"></i> Tentang Kami</h1>
+            <p>Lembaga Kursus Komputer adalah institusi pendidikan yang didedikasikan untuk mengembangkan keterampilan siswa dalam dunia teknologi komputer. Kami fokus pada pengembangan siswa agar mahir dalam penggunaan Microsoft Office, yang merupakan alat penting untuk produktivitas di era digital saat ini. Dengan pendekatan pembelajaran yang interaktif dan praktis, kami membantu siswa mencapai potensi maksimal mereka.</p>
+        </section>
+        
+        <section class="courses-focus">
+            <h2><i class="fas fa-target"></i> Fokus Kursus Kami</h2>
+            <ul>
+                <li><i class="fas fa-file-word"></i> <strong>Microsoft Word:</strong> Belajar membuat dokumen profesional, format teks, dan kolaborasi.</li>
+                <li><i class="fas fa-file-excel"></i> <strong>Microsoft Excel:</strong> Menguasai analisis data, rumus, grafik, dan otomasi tugas.</li>
+                <li><i class="fas fa-presentation-screen"></i> <strong>Microsoft PowerPoint:</strong> Membuat presentasi yang menarik dan efektif untuk berbagai keperluan.</li>
+                <li><i class="fas fa-envelope"></i> <strong>Microsoft Outlook:</strong> Mengelola email, kalender, dan tugas dengan efisien.</li>
+                <li><i class="fas fa-cogs"></i> <strong>Pengembangan Siswa:</strong> Kurikulum dirancang untuk meningkatkan keterampilan praktis, kreativitas, dan kemampuan problem-solving.</li>
+            </ul>
+            <div class="chart-container">
+                <canvas id="coursesChart"></canvas>
+            </div>
+        </section>
+        
+        <section class="founder-card">
+            <img src="https://via.placeholder.com/150" alt="Foto Fiki Kurniawan">
+            <h3>Fiki Kurniawan, S.Kom</h3>
+            <p>Fiki Kurniawan, S.Kom adalah pendiri dan penggerak di balik Lembaga Kursus Komputer. Dengan latar belakang pendidikan di bidang komputer dan pengalaman bertahun-tahun dalam dunia pendidikan teknologi, beliau berkomitmen untuk memberikan pendidikan berkualitas tinggi. Visi Fiki adalah menciptakan generasi muda yang tidak hanya mahir dalam perangkat lunak seperti Microsoft Office, tetapi juga siap menghadapi tantangan dunia kerja modern. "Pendidikan adalah kunci untuk membuka pintu masa depan," kata Fiki.</p>
+        </section>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('header, .profile-section, .courses-focus, .founder-card');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.5s, transform 0.5s';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 300);
+            });
+            
+            // Data untuk grafik (contoh: jumlah siswa per kursus dari localStorage)
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            const courseCounts = {
+                'Dasar Pemrograman': 0,
+                'Database MySQL': 0,
+                'Web Development PHP': 0,
+                'Desain Grafis Photoshop': 0
+            };
+            for (const user in userData) {
+                if (courseCounts[userData[user].course] !== undefined) {
+                    courseCounts[userData[user].course]++;
+                }
+            }
+            
+            const ctx = document.getElementById('coursesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(courseCounts),
+                    datasets: [{
+                        label: 'Jumlah Siswa Terdaftar',
+                        data: Object.values(courseCounts),
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c'],
+                        borderColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

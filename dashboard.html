@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kursus Komputer Modern - Beranda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; display: flex; min-height: 100vh; }
+        .sidebar { width: 250px; background: #2c3e50; color: white; padding: 20px; position: fixed; height: 100%; overflow-y: auto; box-shadow: 2px 0 5px rgba(0,0,0,0.1); }
+        .sidebar h2 { margin-bottom: 20px; font-size: 1.5em; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { margin-bottom: 15px; }
+        .sidebar ul li a { color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: background 0.3s; }
+        .sidebar ul li a:hover { background: #34495e; }
+        .sidebar ul li a i { margin-right: 10px; }
+        .main-content { margin-left: 250px; flex: 1; padding: 20px; }
+        .hero { background: url('https://via.placeholder.com/1920x600?text=Kursus+Komputer') no-repeat center center/cover; height: 60vh; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); border-radius: 10px; margin-bottom: 20px; }
+        .section { padding: 40px 0; background: white; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card { border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+        footer { background: #333; color: white; text-align: center; padding: 20px 0; margin-top: 20px; border-radius: 10px; }
+        @media (max-width: 768px) { .sidebar { width: 100%; height: auto; position: static; } .main-content { margin-left: 0; } }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <h2><i class="fas fa-laptop-code"></i> Kursus Komputer</h2>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="vvvv.html"><i class="fas fa-book"></i> Kursus</a></li>
+            <li><a href="w.html"><i class="fas fa-user"></i> Profil</a></li>
+            <li><a href="q.html"><i class="fas fa-user-plus"></i> Pendaftaran</a></li>
+            <li><a href="d.html"><i class="fas fa-users"></i> Data Siswa</a></li>
+            <li><a href="input-pegawai.html"><i class="fas fa-user-edit"></i> Input Pegawai</a></li>
+            <li><a href="data-pegawai.html"><i class="fas fa-users-cog"></i> Data Pegawai</a></li>
+            <li><a href="es.html"><i class="fas fa-certificate"></i> E-Sertifikat</a></li>
+            <li><a href="e-learning.html"><i class="fas fa-graduation-cap"></i> E-Learning</a></li>
+            <li><a href="logincoba.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container text-center">
+                <h1 class="display-4">Selamat Datang di Kursus Komputer</h1>
+                <h1 class="display-4">INETWORK DIGITAL TEKNOLOGI</h1>
+                <p class="lead">Pelajari keterampilan komputer masa depan dengan cara yang menyenangkan dan praktis.</p>
+                <a href="#register" class="btn btn-primary btn-lg">Pelajari Selengkapnya</a>
+            </div>
+        </section>
+
+        <!-- Tentang Komputer -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="text-center mb-4">Apa Itu Komputer?</h2>
+                <p class="text-center">Komputer adalah mesin elektronik yang dapat memproses data dengan cepat dan akurat. Dari perangkat sederhana seperti kalkulator hingga superkomputer, komputer telah merevolusi dunia dengan memungkinkan komunikasi, analisis data, dan inovasi teknologi. Di era digital ini, memahami komputer adalah kunci untuk sukses di berbagai bidang.</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300x200?text=Hardware" class="card-img-top" alt="Hardware">
+                            <div class="card-body">
+                                <h5 class="card-title">Hardware</h5>
+                                <p class="card-text">Pelajari komponen fisik seperti CPU, RAM, dan penyimpanan.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300x200?text=Software" class="card-img-top" alt="Software">
+                            <div class="card-body">
+                                <h5 class="card-title">Software</h5>
+                                <p class="card-text">Eksplorasi program dan sistem operasi seperti Windows dan Linux.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300x200?text=Jaringan" class="card-img-top" alt="Jaringan">
+                            <div class="card-body">
+                                <h5 class="card-title">Jaringan</h5>
+                                <p class="card-text">Memahami koneksi internet dan keamanan data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sejarah Kursus -->
+        <section id="history" class="section">
+            <div class="container">
+                <h2 class="text-center mb-4">Sejarah Berdirinya Kursus Komputer</h2>
+                <p class="text-center">Kursus Komputer Modern didirikan pada tahun 2010 oleh sekelompok ahli teknologi yang melihat kebutuhan akan pendidikan komputer yang mudah diakses. Awalnya dimulai sebagai kelas kecil di sebuah ruangan sederhana, kursus ini telah berkembang menjadi platform online dan offline yang telah melatih ribuan siswa. Kami berkomitmen untuk terus berinovasi agar tetap relevan dengan perkembangan teknologi terkini.</p>
+                <div class="timeline">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>2010: Pendirian</h5>
+                            <p>Kelas pertama dengan 10 siswa.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>2015: Ekspansi Online</h5>
+                            <p>Peluncuran platform e-learning.</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h5>2020: Pandemi Adaptasi</h5>
+                            <p>Transisi penuh ke pembelajaran daring.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>2023: Inovasi Terbaru</h5>
+                            <p>Integrasi AI dan VR dalam kurikulum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materi yang Diajarkan -->
+        <section id="courses" class="section">
+            <div class="container">
+                <h2 class="text-center mb-4">Materi yang Diajarkan</h2>
+                <p class="text-center">Kurikulum kami dirancang untuk pemula hingga mahir, mencakup topik esensial dalam dunia komputer.</p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Dasar Komputer</h5>
+                                <p class="card-text">Pengantar hardware, software, dan operasi dasar.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Microsoft Office</h5>
+                                <p class="card-text">Word, Excel, PowerPoint untuk produktivitas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Pemrograman</h5>
+                                <p class="card-text">Python, JavaScript, dan web development.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Keamanan Cyber</h5>
+                                <p class="card-text">Proteksi data dan pencegahan hacking.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cara Daftar -->
+        <section id="register" class="section">
+            <div class="container">
+                <h2 class="text-center mb-4">Cara Daftar Kursus</h2>
+                <p class="text-center">Bergabunglah dengan mudah! Ikuti langkah-langkah berikut untuk mendaftar.</p>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <h5>1. Pilih Kursus</h5>
+                        <p>Pilih materi yang sesuai dengan kebutuhan Anda dari daftar kursus kami.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h5>2. Isi Formulir</h5>
+                        <p>Lengkapi formulir pendaftaran online dengan data pribadi dan pembayaran.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h5>3. Mulai Belajar</h5>
+                        <p>Dapatkan akses ke materi dan mulai kursus Anda segera!</p>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-success btn-lg" onclick="alert('Formulir pendaftaran akan dibuka!')">Daftar Sekarang</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2023 Kursus Komputer Modern. Semua hak dilindungi.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Siswa - Lembaga Kursus Komputer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Tambahkan jsPDF untuk generasi PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background: #34495e;
+        }
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #f4f4f4;
+            font-weight: 600;
+        }
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 5px;
+            transition: background 0.3s;
+        }
+        .btn-edit {
+            background: #f39c12;
+            color: white;
+        }
+        .btn-edit:hover {
+            background: #e67e22;
+        }
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-delete:hover {
+            background: #c0392b;
+        }
+        .btn-print {
+            background: #3498db;
+            color: white;
+        }
+        .btn-print:hover {
+            background: #2980b9;
+        }
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .container {
+                padding: 20px;
+            }
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-laptop-code"></i> Kursus Komputer</h2>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="vvvv.html"><i class="fas fa-book"></i> Kursus</a></li>
+            <li><a href="w.html"><i class="fas fa-user"></i> Profil</a></li>
+            <li><a href="q.html"><i class="fas fa-user-plus"></i> Pendaftaran</a></li>
+            <li><a href="d.html"><i class="fas fa-users"></i> Data Siswa</a></li>
+            <li><a href="input-pegawai.html"><i class="fas fa-user-edit"></i> Input Pegawai</a></li>
+            <li><a href="data-pegawai.html"><i class="fas fa-users-cog"></i> Data Pegawai</a></li>
+            <li><a href="es.html"><i class="fas fa-certificate"></i> E-Sertifikat</a></li>
+            <li><a href="e-learning.html"><i class="fas fa-graduation-cap"></i> E-Learning</a></li>
+            <li><a href="logincoba.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <div class="container">
+            <h1><i class="fas fa-users"></i> Data Siswa</h1>
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th>Nama Lengkap</th>
+                        <th>NIK</th>
+                        <th>Nama Orang Tua</th>
+                        <th>Jam Pelajaran</th>
+                        <th>Hari</th>
+                        <th>No HP</th>
+                        <th>Tanggal Daftar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="studentBody">
+                    <!-- Data akan diisi oleh JavaScript -->
+                </tbody>
+            </table>
+            <div id="noData" class="no-data">Belum ada data siswa.</div>
+        </div>
+    </div>
+    
+    <script>
+        // Fungsi untuk render tabel
+        function renderTable() {
+            const students = JSON.parse(localStorage.getItem('studentData')) || [];
+            const tbody = document.getElementById('studentBody');
+            const noData = document.getElementById('noData');
+            
+            tbody.innerHTML = '';
+            
+            if (students.length === 0) {
+                noData.style.display = 'block';
+                return;
+            }
+            
+            noData.style.display = 'none';
+            
+            students.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.namaLengkap}</td>
+                    <td>${student.nik}</td>
+                    <td>${student.namaOrangTua}</td>
+                    <td>${student.jamPelajaran}</td>
+                    <td>${student.hari}</td>
+                    <td>${student.noHp}</td>
+                    <td>${student.tanggalDaftar}</td>
+                    <td>
+                        <button class="btn btn-edit" onclick="editStudent(${index})">Edit</button>
+                        <button class="btn btn-delete" onclick="deleteStudent(${index})">Hapus</button>
+                        <button class="btn btn-print" onclick="printStudentPDF(${index})"><i class="fas fa-print"></i> Print PDF</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Fungsi edit siswa (sederhana: prompt untuk demo)
+        function editStudent(index) {
+            const students = JSON.parse(localStorage.getItem('studentData')) || [];
+            const student = students[index];
+            
+            // Prompt sederhana untuk edit (bisa diganti dengan modal form)
+            const newName = prompt('Edit Nama Lengkap:', student.namaLengkap);
+            if (newName !== null) {
+                student.namaLengkap = newName.trim();
+                localStorage.setItem('studentData', JSON.stringify(students));
+                renderTable();
+            }
+        }
+        
+        // Fungsi hapus siswa
+        function deleteStudent(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus data siswa ini?')) {
+                const students = JSON.parse(localStorage.getItem('studentData')) || [];
+                students.splice(index, 1);
+                localStorage.setItem('studentData', JSON.stringify(students));
+                renderTable();
+            }
+        }
+        
+        // Fungsi print PDF siswa
+        function printStudentPDF(index) {
+            const students = JSON.parse(localStorage.getItem('studentData')) || [];
+            const student = students[index];
+            
+            // Inisialisasi jsPDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Tambahkan konten ke PDF
+            doc.setFontSize(20);
+            doc.text('Detail Siswa', 20, 30);
+            doc.setFontSize(12);
+            doc.text(`Nama Lengkap: ${student.namaLengkap}`, 20, 50);
+            doc.text(`NIK: ${student.nik}`, 20, 60);
+            doc.text(`Nama Orang Tua: ${student.namaOrangTua}`, 20, 70);
+            doc.text(`Jam Pelajaran: ${student.jamPelajaran}`, 20, 80);
+            doc.text(`Hari: ${student.hari}`, 20, 90);
+            doc.text(`No HP: ${student.noHp}`, 20, 100);
+            doc.text(`Tanggal Daftar: ${student.tanggalDaftar}`, 20, 110);
+            
+            // Unduh PDF
+            doc.save(`Detail_Siswa_${student.namaLengkap.replace(/\s+/g, '_')}.pdf`);
+        }
+        
+        // Render tabel saat halaman load
+        document.addEventListener('DOMContentLoaded', renderTable);
+    </script>
+</body>
+</html>
